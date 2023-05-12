@@ -1,4 +1,4 @@
-// Once In-Use Image data has been gathered, this package reports the data to Anchore
+// Once In-Use Image data has been gathered, this package reports the data to Nextlinux
 package reporter
 
 import (
@@ -17,12 +17,12 @@ import (
 
 const ReportAPIPath = "v1/enterprise/ecs-inventory"
 
-// This method does the actual Reporting (via HTTP) to Anchore
+// This method does the actual Reporting (via HTTP) to Nextlinux
 //
 //nolint:gosec
-func Post(report Report, nextlinuxDetails connection.AnchoreInfo) error {
+func Post(report Report, nextlinuxDetails connection.NextlinuxInfo) error {
 	defer tracker.TrackFunctionTime(time.Now(), fmt.Sprintf("Posting Inventory Report for cluster %s", report.ClusterARN))
-	logger.Log.Info("Reporting results to Anchore", "Account", nextlinuxDetails.Account)
+	logger.Log.Info("Reporting results to Nextlinux", "Account", nextlinuxDetails.Account)
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: nextlinuxDetails.HTTP.Insecure},
 	}
@@ -43,7 +43,7 @@ func Post(report Report, nextlinuxDetails connection.AnchoreInfo) error {
 
 	req, err := http.NewRequest("POST", nextlinuxURL, bytes.NewBuffer(reqBody))
 	if err != nil {
-		return fmt.Errorf("failed to build request to report data to Anchore: %w", err)
+		return fmt.Errorf("failed to build request to report data to Nextlinux: %w", err)
 	}
 	req.SetBasicAuth(nextlinuxDetails.User, nextlinuxDetails.Password)
 	req.Header.Set("Content-Type", "application/json")
@@ -52,20 +52,20 @@ func Post(report Report, nextlinuxDetails connection.AnchoreInfo) error {
 	if err != nil {
 		if resp != nil {
 			if resp.StatusCode == 401 {
-				return fmt.Errorf("failed to report data to Anchore, check credentials: %w", err)
+				return fmt.Errorf("failed to report data to Nextlinux, check credentials: %w", err)
 			}
 		}
-		return fmt.Errorf("failed to report data to Anchore: %w", err)
+		return fmt.Errorf("failed to report data to Nextlinux: %w", err)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		return fmt.Errorf("failed to report data to Anchore: %+v", resp)
+		return fmt.Errorf("failed to report data to Nextlinux: %+v", resp)
 	}
-	logger.Log.Debug("Successfully reported results to Anchore", "Account", nextlinuxDetails.Account)
+	logger.Log.Debug("Successfully reported results to Nextlinux", "Account", nextlinuxDetails.Account)
 	return nil
 }
 
-func buildURL(nextlinuxDetails connection.AnchoreInfo) (string, error) {
+func buildURL(nextlinuxDetails connection.NextlinuxInfo) (string, error) {
 	nextlinuxURL, err := url.Parse(nextlinuxDetails.URL)
 	if err != nil {
 		return "", err

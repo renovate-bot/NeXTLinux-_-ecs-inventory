@@ -27,7 +27,7 @@ func TestLoadConfigFromFileCliConfigPath(t *testing.T) {
 			Level:        "info",
 			FileLocation: "/var/log/nextlinux-ecs-inventory.log",
 		},
-		AnchoreDetails: connection.AnchoreInfo{
+		NextlinuxDetails: connection.NextlinuxInfo{
 			Account:  "admin",
 			User:     "admin",
 			Password: "foobar",
@@ -73,7 +73,7 @@ func TestPasswordsAreObfuscated(t *testing.T) {
 			ConfigPath: "testdata/config.yaml",
 		},
 		PollingIntervalSeconds: 300,
-		AnchoreDetails: connection.AnchoreInfo{
+		NextlinuxDetails: connection.NextlinuxInfo{
 			URL:      "http://localhost:8228/v1",
 			User:     "admin",
 			Password: "foobar",
@@ -124,7 +124,7 @@ func TestDefaultValuesSuppliedForEmptyConfig(t *testing.T) {
 		Log: Logging{
 			Level: "info",
 		},
-		AnchoreDetails: connection.AnchoreInfo{
+		NextlinuxDetails: connection.NextlinuxInfo{
 			Account:  "admin",
 			Password: "",
 			HTTP: connection.HTTPConfig{

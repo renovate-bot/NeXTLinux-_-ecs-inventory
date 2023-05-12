@@ -5,7 +5,7 @@ COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certifica
 
 WORKDIR /tmp
 
-COPY nextlinux-ecs-inventory /
+COPY ./ecs-inventory /
 
 ARG BUILD_DATE
 ARG BUILD_VERSION
@@ -17,9 +17,9 @@ LABEL org.opencontainers.image.version=$BUILD_VERSION
 LABEL org.opencontainers.image.revision=$VCS_REF
 LABEL org.opencontainers.image.source=$VCS_URL
 
-LABEL org.opencontainers.image.title="nextlinux-ecs-inventory"
-LABEL org.opencontainers.image.description="AEI (Anchore ECS Inventory) is a tool to gather an inventory of images in use by Amazon Elastic Container Service (ECS)."
-LABEL org.opencontainers.image.vendor="Anchore, Inc."
+LABEL org.opencontainers.image.title="ecs-inventory"
+LABEL org.opencontainers.image.description="AEI (Nextlinux ECS Inventory) is a tool to gather an inventory of images in use by Amazon Elastic Container Service (ECS)."
+LABEL org.opencontainers.image.vendor="Nextlinux, Inc."
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 
-ENTRYPOINT ["/nextlinux-ecs-inventory"]
+ENTRYPOINT ["/ecs-inventory"]

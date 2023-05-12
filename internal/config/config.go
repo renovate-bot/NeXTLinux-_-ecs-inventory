@@ -36,10 +36,10 @@ type AppConfig struct {
 	Log                    Logging `mapstructure:"log"`
 	CliOptions             CliOnlyOptions
 	PollingIntervalSeconds int                    `mapstructure:"polling-interval-seconds"`
-	AnchoreDetails         connection.AnchoreInfo `mapstructure:"nextlinux"`
+	NextlinuxDetails         connection.NextlinuxInfo `mapstructure:"nextlinux"`
 	Region                 string                 `mapstructure:"region"`
 	Quiet                  bool                   `mapstructure:"quiet"`   // if true do not log the inventory report to stdout
-	DryRun                 bool                   `mapstructure:"dry-run"` // if true do not report inventory to Anchore
+	DryRun                 bool                   `mapstructure:"dry-run"` // if true do not report inventory to Nextlinux
 }
 
 // Logging Configuration
@@ -53,7 +53,7 @@ var DefaultConfigValues = AppConfig{
 		Level:        "",
 		FileLocation: "",
 	},
-	AnchoreDetails: connection.AnchoreInfo{
+	NextlinuxDetails: connection.NextlinuxInfo{
 		Account: "admin",
 		HTTP: connection.HTTPConfig{
 			Insecure:       false,
@@ -71,9 +71,9 @@ var ErrConfigFileNotFound = fmt.Errorf("application config file not found")
 func setDefaultValues(v *viper.Viper) {
 	v.SetDefault("log.level", DefaultConfigValues.Log.Level)
 	v.SetDefault("log.file", DefaultConfigValues.Log.FileLocation)
-	v.SetDefault("nextlinux.account", DefaultConfigValues.AnchoreDetails.Account)
-	v.SetDefault("nextlinux.http.insecure", DefaultConfigValues.AnchoreDetails.HTTP.Insecure)
-	v.SetDefault("nextlinux.http.timeout-seconds", DefaultConfigValues.AnchoreDetails.HTTP.TimeoutSeconds)
+	v.SetDefault("nextlinux.account", DefaultConfigValues.NextlinuxDetails.Account)
+	v.SetDefault("nextlinux.http.insecure", DefaultConfigValues.NextlinuxDetails.HTTP.Insecure)
+	v.SetDefault("nextlinux.http.timeout-seconds", DefaultConfigValues.NextlinuxDetails.HTTP.TimeoutSeconds)
 }
 
 // Load the Application Configuration from the Viper specifications
@@ -196,8 +196,8 @@ func (cfg AppConfig) String() string {
 	// redact sensitive information
 	// Note: If the configuration grows to have more redacted fields it would be good to refactor this into something that
 	// is more dynamic based on a property or list of "sensitive" fields
-	if cfg.AnchoreDetails.Password != "" {
-		cfg.AnchoreDetails.Password = redacted
+	if cfg.NextlinuxDetails.Password != "" {
+		cfg.NextlinuxDetails.Password = redacted
 	}
 
 	// yaml is pretty human friendly (at least when compared to json)

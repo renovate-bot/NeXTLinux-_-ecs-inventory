@@ -19,8 +19,8 @@ var ErrMissingDefaultConfigValue = fmt.Errorf("missing default config value")
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "nextlinux-ecs-inventory",
-	Short: "nextlinux-ecs-inventory tells Anchore which images are in use in your ECS clusters",
-	Long:  "nextlinux-ecs-inventory can poll Amazon ECS (Elastic Container Service) APIs to tell Anchore which Images are currently in-use",
+	Short: "nextlinux-ecs-inventory tells Nextlinux which images are in use in your ECS clusters",
+	Long:  "nextlinux-ecs-inventory can poll Amazon ECS (Elastic Container Service) APIs to tell Nextlinux which Images are currently in-use",
 	Args:  cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) > 0 {
@@ -44,24 +44,24 @@ var rootCmd = &cobra.Command{
 
 		// Validate nextlinux connection & credentials, using a dummy report to post but this will be
 		// replaced in the future with a health check endpoint for the agents
-		if appConfig.AnchoreDetails.IsValid() {
+		if appConfig.NextlinuxDetails.IsValid() {
 			dummyReport := reporter.Report{
 				ClusterARN: "validating-creds",
 				Timestamp:  time.Now().UTC().Format(time.RFC3339),
 			}
-			err := reporter.Post(dummyReport, appConfig.AnchoreDetails)
+			err := reporter.Post(dummyReport, appConfig.NextlinuxDetails)
 			if err != nil {
-				log.Error("Failed to validate connection to Anchore", err)
+				log.Error("Failed to validate connection to Nextlinux", err)
 			} else {
-				log.Info("Successfully validated connection to Anchore")
+				log.Info("Successfully validated connection to Nextlinux")
 			}
 		} else {
-			log.Debug("Anchore details not specified, will not report inventory")
+			log.Debug("Nextlinux details not specified, will not report inventory")
 		}
 
 		pkg.PeriodicallyGetInventoryReport(
 			appConfig.PollingIntervalSeconds,
-			appConfig.AnchoreDetails,
+			appConfig.NextlinuxDetails,
 			appConfig.Region,
 			appConfig.Quiet,
 			appConfig.DryRun,
@@ -96,7 +96,7 @@ func init() {
 
 	opt = "dry-run"
 	rootCmd.Flags().
-		BoolP(opt, "d", config.DefaultConfigValues.DryRun, "do not report inventory to Anchore")
+		BoolP(opt, "d", config.DefaultConfigValues.DryRun, "do not report inventory to Nextlinux")
 	if err := viper.BindPFlag(opt, rootCmd.Flags().Lookup(opt)); err != nil {
 		fmt.Printf("unable to bind flag '%s': %+v", opt, err)
 		os.Exit(1)

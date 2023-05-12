@@ -29,16 +29,16 @@ func reportToStdout(report reporter.Report) error {
 	return nil
 }
 
-func HandleReport(report reporter.Report, nextlinuxDetails connection.AnchoreInfo, quiet, dryRun bool) error {
+func HandleReport(report reporter.Report, nextlinuxDetails connection.NextlinuxInfo, quiet, dryRun bool) error {
 	switch {
 	case dryRun:
 		logger.Log.Info("Dry run specified, not reporting inventory")
 	case nextlinuxDetails.IsValid():
 		if err := reporter.Post(report, nextlinuxDetails); err != nil {
-			return fmt.Errorf("unable to report Inventory to Anchore: %w", err)
+			return fmt.Errorf("unable to report Inventory to Nextlinux: %w", err)
 		}
 	default:
-		logger.Log.Debug("Anchore details not specified, not reporting inventory")
+		logger.Log.Debug("Nextlinux details not specified, not reporting inventory")
 	}
 
 	if !quiet {
@@ -47,7 +47,7 @@ func HandleReport(report reporter.Report, nextlinuxDetails connection.AnchoreInf
 	return nil
 }
 
-func GetInventoryReportsForRegion(region string, nextlinuxDetails connection.AnchoreInfo, quiet, dryRun bool) error {
+func GetInventoryReportsForRegion(region string, nextlinuxDetails connection.NextlinuxInfo, quiet, dryRun bool) error {
 	defer tracker.TrackFunctionTime(time.Now(), fmt.Sprintf("Getting Inventory Reports for region: %s", region))
 	logger.Log.Info("Getting Inventory Reports for region", "region", region)
 	sessConfig := &aws.Config{}

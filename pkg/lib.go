@@ -14,7 +14,7 @@ var log logger.Logger
 // Note: Errors do not cause the function to exit, since this is periodically running
 func PeriodicallyGetInventoryReport(
 	pollingIntervalSeconds int,
-	nextlinuxDetails connection.AnchoreInfo,
+	nextlinuxDetails connection.NextlinuxInfo,
 	region string,
 	quiet, dryRun bool,
 ) {

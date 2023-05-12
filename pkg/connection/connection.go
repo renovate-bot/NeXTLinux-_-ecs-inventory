@@ -1,7 +1,7 @@
 package connection
 
-// Information for posting in-use image details to Anchore (or any URL for that matter)
-type AnchoreInfo struct {
+// Information for posting in-use image details to Nextlinux (or any URL for that matter)
+type NextlinuxInfo struct {
 	URL      string     `mapstructure:"url"`
 	User     string     `mapstructure:"user"`
 	Password string     `mapstructure:"password"`
@@ -15,8 +15,8 @@ type HTTPConfig struct {
 	TimeoutSeconds int  `mapstructure:"timeout-seconds"`
 }
 
-// Return whether or not AnchoreDetails are specified
-func (nextlinux *AnchoreInfo) IsValid() bool {
+// Return whether or not NextlinuxDetails are specified
+func (nextlinux *NextlinuxInfo) IsValid() bool {
 	return nextlinux.URL != "" &&
 		nextlinux.User != "" &&
 		nextlinux.Password != ""

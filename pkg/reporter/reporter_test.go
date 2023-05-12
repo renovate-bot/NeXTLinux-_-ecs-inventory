@@ -7,7 +7,7 @@ import (
 )
 
 func TestBuildUrl(t *testing.T) {
-	nextlinuxDetails := connection.AnchoreInfo{
+	nextlinuxDetails := connection.NextlinuxInfo{
 		URL:      "https://ancho.re",
 		User:     "admin",
 		Password: "foobar",

@@ -1,4 +1,4 @@
-# Anchore ECS Inventory
+# Nextlinux ECS Inventory
 
 `nextlinux-ecs-inventory` is a tool to gather an inventory of images in use by
 Amazon Elastic Container Service (ECS).
@@ -9,7 +9,7 @@ Amazon Elastic Container Service (ECS).
 command:
 
 ```
-$ nextlinux-ecs-inventory can poll Amazon ECS (Elastic Container Service) APIs to tell Anchore which Images are currently in-use
+$ nextlinux-ecs-inventory can poll Amazon ECS (Elastic Container Service) APIs to tell Nextlinux which Images are currently in-use
 
 Usage:
   nextlinux-ecs-inventory [flags]
@@ -22,7 +22,7 @@ Available Commands:
 
 Flags:
   -c, --config string                     application config file
-  -d, --dry-run                           do not report inventory to Anchore
+  -d, --dry-run                           do not report inventory to Nextlinux
   -h, --help                              help for nextlinux-ecs-inventory
   -p, --polling-interval-seconds string   this specifies the polling interval of the ECS API in seconds (default "300")
   -q, --quiet                             suppresses inventory report output to stdout
@@ -34,12 +34,12 @@ Use "nextlinux-ecs-inventory [command] --help" for more information about a comm
 
 ## Configuration
 
-`nextlinux-ecs-inventory` needs to be configured with AWS credentials and Anchore
+`nextlinux-ecs-inventory` needs to be configured with AWS credentials and Nextlinux
 ECS Inventory configuration.
 
 ### AWS Credentials
 
-Anchore ECS Inventory uses the AWS SDK for Go. The SDK will look for credentials
+Nextlinux ECS Inventory uses the AWS SDK for Go. The SDK will look for credentials
 in the following order:
 
 1. Environment variables
@@ -50,9 +50,9 @@ in the following order:
    aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
    ```
 
-### Anchore ECS Inventory Configuration
+### Nextlinux ECS Inventory Configuration
 
-Anchore ECS Inventory can be configured with a configuration file. The default
+Nextlinux ECS Inventory can be configured with a configuration file. The default
 location the configuration file is looked for is
 `~/.nextlinux-ecs-inventory.yaml`. The configuration file can be overridden
 with the `-c` flag.
