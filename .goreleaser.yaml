@@ -2,7 +2,7 @@ release:
   prerelease: auto
 
 builds:
-  - binary: anchore-ecs-inventory
+  - binary: nextlinux-ecs-inventory
     env:
       - CGO_ENABLED=0
     goos:
@@ -17,10 +17,10 @@ builds:
       -w
       -s
       -extldflags '-static'
-      -X github.com/anchore/ecs-inventory/internal/version.version={{.Version}}
-      -X github.com/anchore/ecs-inventory/internal/version.gitCommit={{.Commit}}
-      -X github.com/anchore/ecs-inventory/internal/version.buildDate={{.Date}}
-      -X github.com/anchore/ecs-inventory/internal/version.gitDescription={{.Summary}}
+      -X github.com/nextlinux/ecs-inventory/internal/version.version={{.Version}}
+      -X github.com/nextlinux/ecs-inventory/internal/version.gitCommit={{.Commit}}
+      -X github.com/nextlinux/ecs-inventory/internal/version.buildDate={{.Date}}
+      -X github.com/nextlinux/ecs-inventory/internal/version.gitDescription={{.Summary}}
 
 
 archives:
@@ -35,10 +35,10 @@ changelog:
 
 dockers:
   - image_templates:
-      - "anchore/ecs-inventory:latest"
-      - "anchore/ecs-inventory:{{ .Tag }}-amd64"
-      - "anchore/ecs-inventory:v{{ .Major }}-amd64"
-      - "anchore/ecs-inventory:v{{ .Major }}.{{ .Minor }}-amd64"
+      - "nextlinux/ecs-inventory:latest"
+      - "nextlinux/ecs-inventory:{{ .Tag }}-amd64"
+      - "nextlinux/ecs-inventory:v{{ .Major }}-amd64"
+      - "nextlinux/ecs-inventory:v{{ .Major }}.{{ .Minor }}-amd64"
     dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
@@ -49,9 +49,9 @@ dockers:
       - "--build-arg=VCS_URL={{.GitURL}}"
 
   - image_templates:
-      - "anchore/ecs-inventory:{{ .Tag }}-arm64v8"
-      - "anchore/ecs-inventory:v{{ .Major }}-arm64v8"
-      - "anchore/ecs-inventory:v{{ .Major }}.{{ .Minor }}-arm64v8"
+      - "nextlinux/ecs-inventory:{{ .Tag }}-arm64v8"
+      - "nextlinux/ecs-inventory:v{{ .Major }}-arm64v8"
+      - "nextlinux/ecs-inventory:v{{ .Major }}.{{ .Minor }}-arm64v8"
     goarch: arm64
     dockerfile: Dockerfile
     use: buildx
@@ -63,20 +63,20 @@ dockers:
       - "--build-arg=VCS_URL={{.GitURL}}"
 
 docker_manifests:
-  - name_template: anchore/ecs-inventory:{{ .Tag }}
+  - name_template: nextlinux/ecs-inventory:{{ .Tag }}
     image_templates:
-      - anchore/ecs-inventory:{{ .Tag }}-amd64
-      - anchore/ecs-inventory:v{{ .Major }}-amd64
-      - anchore/ecs-inventory:v{{ .Major }}.{{ .Minor }}-amd64
-      - anchore/ecs-inventory:{{ .Tag }}-arm64v8
-      - anchore/ecs-inventory:v{{ .Major }}-arm64v8
-      - anchore/ecs-inventory:v{{ .Major }}.{{ .Minor }}-arm64v8
-  - name_template: anchore/ecs-inventory:latest
+      - nextlinux/ecs-inventory:{{ .Tag }}-amd64
+      - nextlinux/ecs-inventory:v{{ .Major }}-amd64
+      - nextlinux/ecs-inventory:v{{ .Major }}.{{ .Minor }}-amd64
+      - nextlinux/ecs-inventory:{{ .Tag }}-arm64v8
+      - nextlinux/ecs-inventory:v{{ .Major }}-arm64v8
+      - nextlinux/ecs-inventory:v{{ .Major }}.{{ .Minor }}-arm64v8
+  - name_template: nextlinux/ecs-inventory:latest
     image_templates:
-      - anchore/ecs-inventory:{{ .Tag }}-amd64
-      - anchore/ecs-inventory:v{{ .Major }}-amd64
-      - anchore/ecs-inventory:v{{ .Major }}.{{ .Minor }}-amd64
-      - anchore/ecs-inventory:{{ .Tag }}-arm64v8
-      - anchore/ecs-inventory:v{{ .Major }}-arm64v8
-      - anchore/ecs-inventory:v{{ .Major }}.{{ .Minor }}-arm64v8
+      - nextlinux/ecs-inventory:{{ .Tag }}-amd64
+      - nextlinux/ecs-inventory:v{{ .Major }}-amd64
+      - nextlinux/ecs-inventory:v{{ .Major }}.{{ .Minor }}-amd64
+      - nextlinux/ecs-inventory:{{ .Tag }}-arm64v8
+      - nextlinux/ecs-inventory:v{{ .Major }}-arm64v8
+      - nextlinux/ecs-inventory:v{{ .Major }}.{{ .Minor }}-arm64v8
       

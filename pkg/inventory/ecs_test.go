@@ -6,7 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ecs/ecsiface"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/anchore/ecs-inventory/pkg/reporter"
+	"github.com/nextlinux/ecs-inventory/pkg/reporter"
 )
 
 // Return a pointer to the passed value

@@ -12,10 +12,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/ecs"
 	"github.com/aws/aws-sdk-go/service/ecs/ecsiface"
 
-	"github.com/anchore/ecs-inventory/internal/logger"
-	"github.com/anchore/ecs-inventory/internal/tracker"
-	"github.com/anchore/ecs-inventory/pkg/connection"
-	"github.com/anchore/ecs-inventory/pkg/reporter"
+	"github.com/nextlinux/ecs-inventory/internal/logger"
+	"github.com/nextlinux/ecs-inventory/internal/tracker"
+	"github.com/nextlinux/ecs-inventory/pkg/connection"
+	"github.com/nextlinux/ecs-inventory/pkg/reporter"
 )
 
 func reportToStdout(report reporter.Report) error {
@@ -29,12 +29,12 @@ func reportToStdout(report reporter.Report) error {
 	return nil
 }
 
-func HandleReport(report reporter.Report, anchoreDetails connection.AnchoreInfo, quiet, dryRun bool) error {
+func HandleReport(report reporter.Report, nextlinuxDetails connection.AnchoreInfo, quiet, dryRun bool) error {
 	switch {
 	case dryRun:
 		logger.Log.Info("Dry run specified, not reporting inventory")
-	case anchoreDetails.IsValid():
-		if err := reporter.Post(report, anchoreDetails); err != nil {
+	case nextlinuxDetails.IsValid():
+		if err := reporter.Post(report, nextlinuxDetails); err != nil {
 			return fmt.Errorf("unable to report Inventory to Anchore: %w", err)
 		}
 	default:
@@ -47,7 +47,7 @@ func HandleReport(report reporter.Report, anchoreDetails connection.AnchoreInfo,
 	return nil
 }
 
-func GetInventoryReportsForRegion(region string, anchoreDetails connection.AnchoreInfo, quiet, dryRun bool) error {
+func GetInventoryReportsForRegion(region string, nextlinuxDetails connection.AnchoreInfo, quiet, dryRun bool) error {
 	defer tracker.TrackFunctionTime(time.Now(), fmt.Sprintf("Getting Inventory Reports for region: %s", region))
 	logger.Log.Info("Getting Inventory Reports for region", "region", region)
 	sessConfig := &aws.Config{}
@@ -87,7 +87,7 @@ func GetInventoryReportsForRegion(region string, anchoreDetails connection.Ancho
 
 			// Only report if there are containers present in the cluster
 			if len(report.Containers) != 0 {
-				err = HandleReport(report, anchoreDetails, quiet, dryRun)
+				err = HandleReport(report, nextlinuxDetails, quiet, dryRun)
 				if err != nil {
 					logger.Log.Error("Failed to report inventory for cluster", err)
 				}

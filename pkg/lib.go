@@ -3,9 +3,9 @@ package pkg
 import (
 	"time"
 
-	"github.com/anchore/ecs-inventory/pkg/connection"
-	"github.com/anchore/ecs-inventory/pkg/inventory"
-	"github.com/anchore/ecs-inventory/pkg/logger"
+	"github.com/nextlinux/ecs-inventory/pkg/connection"
+	"github.com/nextlinux/ecs-inventory/pkg/inventory"
+	"github.com/nextlinux/ecs-inventory/pkg/logger"
 )
 
 var log logger.Logger
@@ -14,7 +14,7 @@ var log logger.Logger
 // Note: Errors do not cause the function to exit, since this is periodically running
 func PeriodicallyGetInventoryReport(
 	pollingIntervalSeconds int,
-	anchoreDetails connection.AnchoreInfo,
+	nextlinuxDetails connection.AnchoreInfo,
 	region string,
 	quiet, dryRun bool,
 ) {
@@ -22,7 +22,7 @@ func PeriodicallyGetInventoryReport(
 	ticker := time.NewTicker(time.Duration(pollingIntervalSeconds) * time.Second)
 
 	for {
-		err := inventory.GetInventoryReportsForRegion(region, anchoreDetails, quiet, dryRun)
+		err := inventory.GetInventoryReportsForRegion(region, nextlinuxDetails, quiet, dryRun)
 		if err != nil {
 			log.Error("Failed to get Inventory Reports for region", err)
 		}

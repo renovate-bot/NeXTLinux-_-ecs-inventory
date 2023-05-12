@@ -2,11 +2,11 @@
 The Config package handles the application configuration. Configurations can come from a variety of places, and
 are listed below in order of precedence:
   - Command Line
-  - .anchore-ecs-inventory.yaml
-  - .anchore-ecs-inventory/config.yaml
-  - ~/.anchore-ecs-inventory.yaml
-  - <XDG_CONFIG_HOME>/anchore-ecs-inventory/config.yaml
-  - Environment Variables prefixed with ANCHORE_ECS_INVENTORY_
+  - .nextlinux-ecs-inventory.yaml
+  - .nextlinux-ecs-inventory/config.yaml
+  - ~/.nextlinux-ecs-inventory.yaml
+  - <XDG_CONFIG_HOME>/nextlinux-ecs-inventory/config.yaml
+  - Environment Variables prefixed with NEXTLINUX_ECS_INVENTORY_
 */package config
 
 import (
@@ -20,8 +20,8 @@ import (
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v2"
 
-	"github.com/anchore/ecs-inventory/internal"
-	"github.com/anchore/ecs-inventory/pkg/connection"
+	"github.com/nextlinux/ecs-inventory/internal"
+	"github.com/nextlinux/ecs-inventory/pkg/connection"
 )
 
 const redacted = "******"
@@ -36,7 +36,7 @@ type AppConfig struct {
 	Log                    Logging `mapstructure:"log"`
 	CliOptions             CliOnlyOptions
 	PollingIntervalSeconds int                    `mapstructure:"polling-interval-seconds"`
-	AnchoreDetails         connection.AnchoreInfo `mapstructure:"anchore"`
+	AnchoreDetails         connection.AnchoreInfo `mapstructure:"nextlinux"`
 	Region                 string                 `mapstructure:"region"`
 	Quiet                  bool                   `mapstructure:"quiet"`   // if true do not log the inventory report to stdout
 	DryRun                 bool                   `mapstructure:"dry-run"` // if true do not report inventory to Anchore
@@ -71,9 +71,9 @@ var ErrConfigFileNotFound = fmt.Errorf("application config file not found")
 func setDefaultValues(v *viper.Viper) {
 	v.SetDefault("log.level", DefaultConfigValues.Log.Level)
 	v.SetDefault("log.file", DefaultConfigValues.Log.FileLocation)
-	v.SetDefault("anchore.account", DefaultConfigValues.AnchoreDetails.Account)
-	v.SetDefault("anchore.http.insecure", DefaultConfigValues.AnchoreDetails.HTTP.Insecure)
-	v.SetDefault("anchore.http.timeout-seconds", DefaultConfigValues.AnchoreDetails.HTTP.TimeoutSeconds)
+	v.SetDefault("nextlinux.account", DefaultConfigValues.AnchoreDetails.Account)
+	v.SetDefault("nextlinux.http.insecure", DefaultConfigValues.AnchoreDetails.HTTP.Insecure)
+	v.SetDefault("nextlinux.http.timeout-seconds", DefaultConfigValues.AnchoreDetails.HTTP.TimeoutSeconds)
 }
 
 // Load the Application Configuration from the Viper specifications
@@ -91,10 +91,10 @@ func LoadConfigFromFile(v *viper.Viper, cliOpts *CliOnlyOptions) (*AppConfig, er
 		fmt.Println(
 			"No config file found. One can be specified with the --config flag or " +
 				"is present at one of the following locations:\n" +
-				"\t- ./anchore-ecs-inventory.yaml\n" +
-				"\t- ./.anchore-ecs-inventory/config.yaml\n" +
-				"\t- $HOME/anchore-ecs-inventory.yaml\n" +
-				"\t- $XDG_CONFIG_HOME/anchore-ecs-inventory/config.yaml\n\n" +
+				"\t- ./nextlinux-ecs-inventory.yaml\n" +
+				"\t- ./.nextlinux-ecs-inventory/config.yaml\n" +
+				"\t- $HOME/nextlinux-ecs-inventory.yaml\n" +
+				"\t- $XDG_CONFIG_HOME/nextlinux-ecs-inventory/config.yaml\n\n" +
 				"Using default configuration values.")
 	} else if err != nil {
 		return nil, err

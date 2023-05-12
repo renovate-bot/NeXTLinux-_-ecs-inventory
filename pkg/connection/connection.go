@@ -16,8 +16,8 @@ type HTTPConfig struct {
 }
 
 // Return whether or not AnchoreDetails are specified
-func (anchore *AnchoreInfo) IsValid() bool {
-	return anchore.URL != "" &&
-		anchore.User != "" &&
-		anchore.Password != ""
+func (nextlinux *AnchoreInfo) IsValid() bool {
+	return nextlinux.URL != "" &&
+		nextlinux.User != "" &&
+		nextlinux.Password != ""
 }

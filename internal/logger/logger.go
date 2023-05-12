@@ -6,7 +6,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/anchore/ecs-inventory/pkg/logger"
+	"github.com/nextlinux/ecs-inventory/pkg/logger"
 )
 
 type NoOpLogger struct{}

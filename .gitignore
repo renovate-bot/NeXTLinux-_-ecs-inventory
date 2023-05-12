@@ -1,5 +1,5 @@
 # most likely a binary from ad hoc go build
-/anchore-ecs-inventory
+/nextlinux-ecs-inventory
 
 # Editor specific files
 .vscode

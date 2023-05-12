@@ -1,15 +1,15 @@
 version: '2.1'
 
 services:
-  anchore-ecs-inventory:
-    image: docker.io/anchore/ecs-inventory:latest
-    container_name: anchore-ecs-inventory
+  nextlinux-ecs-inventory:
+    image: docker.io/nextlinux/ecs-inventory:latest
+    container_name: nextlinux-ecs-inventory
     volumes:
-      - ./anchore-ecs-inventory.yaml:/.anchore-ecs-inventory.yaml
+      - ./nextlinux-ecs-inventory.yaml:/.nextlinux-ecs-inventory.yaml
       - ./aws.config:/.aws/credentials
     environment:
-      ANCHORE_ECS_INVENTORY_ANCHORE_URL: ${ANCHORE_ECS_INVENTORY_ANCHORE_URL:-http://host.docker.internal:8228}
-      ANCHORE_ECS_INVENTORY_ANCHORE_USER: ${ANCHORE_ECS_INVENTORY_ANCHORE_USER:-admin}
-      ANCHORE_ECS_INVENTORY_ANCHORE_PASSWORD: ${ANCHORE_ECS_INVENTORY_ANCHORE_PASSWORD:-foobar}
-      ANCHORE_ECS_INVENTORY_ANCHORE_ACCOUNT: ${ANCHORE_ECS_INVENTORY_ANCHORE_ACCOUNT:-admin}
-      ANCHORE_ECS_INVENTORY_REGION: ${ANCHORE_ECS_INVENTORY_REGION:-eu-west-2}
+      NEXTLINUX_ECS_INVENTORY_NEXTLINUX_URL: ${NEXTLINUX_ECS_INVENTORY_NEXTLINUX_URL:-http://host.docker.internal:8228}
+      NEXTLINUX_ECS_INVENTORY_NEXTLINUX_USER: ${NEXTLINUX_ECS_INVENTORY_NEXTLINUX_USER:-admin}
+      NEXTLINUX_ECS_INVENTORY_NEXTLINUX_PASSWORD: ${NEXTLINUX_ECS_INVENTORY_NEXTLINUX_PASSWORD:-foobar}
+      NEXTLINUX_ECS_INVENTORY_NEXTLINUX_ACCOUNT: ${NEXTLINUX_ECS_INVENTORY_NEXTLINUX_ACCOUNT:-admin}
+      NEXTLINUX_ECS_INVENTORY_REGION: ${NEXTLINUX_ECS_INVENTORY_REGION:-eu-west-2}

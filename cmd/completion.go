@@ -14,13 +14,13 @@ var completionCmd = &cobra.Command{
 
 Bash:
 
-$ source <(anchore-ecs-inventory completion bash)
+$ source <(nextlinux-ecs-inventory completion bash)
 
 # To load completions for each session, execute once:
 Linux:
-  $ anchore-ecs-inventory completion bash > /etc/bash_completion.d/anchore-ecs-inventory
+  $ nextlinux-ecs-inventory completion bash > /etc/bash_completion.d/nextlinux-ecs-inventory
 MacOS:
-  $ anchore-ecs-inventory completion bash > /usr/local/etc/bash_completion.d/anchore-ecs-inventory
+  $ nextlinux-ecs-inventory completion bash > /usr/local/etc/bash_completion.d/nextlinux-ecs-inventory
 
 Zsh:
 
@@ -30,16 +30,16 @@ Zsh:
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 
 # To load completions for each session, execute once:
-$ anchore-ecs-inventory completion zsh > "${fpath[1]}/_anchore-ecs-inventory"
+$ nextlinux-ecs-inventory completion zsh > "${fpath[1]}/_nextlinux-ecs-inventory"
 
 # You will need to start a new shell for this setup to take effect.
 
 Fish:
 
-$ anchore-ecs-inventory completion fish | source
+$ nextlinux-ecs-inventory completion fish | source
 
 # To load completions for each session, execute once:
-$ anchore-ecs-inventory completion fish > ~/.config/fish/completions/anchore-ecs-inventory.fish
+$ nextlinux-ecs-inventory completion fish > ~/.config/fish/completions/nextlinux-ecs-inventory.fish
 `,
 	DisableFlagsInUseLine: true,
 	ValidArgs:             []string{"bash", "zsh", "fish"},

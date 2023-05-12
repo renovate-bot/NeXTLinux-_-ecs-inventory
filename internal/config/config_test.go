@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/anchore/ecs-inventory/pkg/connection"
+	"github.com/nextlinux/ecs-inventory/pkg/connection"
 )
 
 func TestLoadConfigFromFileCliConfigPath(t *testing.T) {
@@ -25,7 +25,7 @@ func TestLoadConfigFromFileCliConfigPath(t *testing.T) {
 		},
 		Log: Logging{
 			Level:        "info",
-			FileLocation: "/var/log/anchore-ecs-inventory.log",
+			FileLocation: "/var/log/nextlinux-ecs-inventory.log",
 		},
 		AnchoreDetails: connection.AnchoreInfo{
 			Account:  "admin",
@@ -59,7 +59,7 @@ func TestLoadConfigFromFileBadCliConfig(t *testing.T) {
 func TestReadConfigNoConfigsPresent(t *testing.T) {
 	t.Cleanup(cleanup)
 
-	err := readConfig(viper.GetViper(), "", "anchore-ecs-inventory-but-not-really-lets-break-this-test")
+	err := readConfig(viper.GetViper(), "", "nextlinux-ecs-inventory-but-not-really-lets-break-this-test")
 
 	assert.Error(t, err)
 }
@@ -89,7 +89,7 @@ clioptions:
   configpath: testdata/config.yaml
   verbosity: 0
 pollingintervalseconds: 300
-anchoredetails:
+nextlinuxdetails:
   url: http://localhost:8228/v1
   user: admin
   password: '******'

@@ -7,10 +7,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/anchore/ecs-inventory/internal/config"
-	"github.com/anchore/ecs-inventory/internal/logger"
-	"github.com/anchore/ecs-inventory/pkg"
-	pkgLog "github.com/anchore/ecs-inventory/pkg/logger"
+	"github.com/nextlinux/ecs-inventory/internal/config"
+	"github.com/nextlinux/ecs-inventory/internal/logger"
+	"github.com/nextlinux/ecs-inventory/pkg"
+	pkgLog "github.com/nextlinux/ecs-inventory/pkg/logger"
 )
 
 var (

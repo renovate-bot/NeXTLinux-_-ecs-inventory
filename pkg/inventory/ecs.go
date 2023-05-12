@@ -10,9 +10,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/ecs"
 	"github.com/aws/aws-sdk-go/service/ecs/ecsiface"
 
-	"github.com/anchore/ecs-inventory/internal/logger"
-	"github.com/anchore/ecs-inventory/internal/tracker"
-	"github.com/anchore/ecs-inventory/pkg/reporter"
+	"github.com/nextlinux/ecs-inventory/internal/logger"
+	"github.com/nextlinux/ecs-inventory/internal/tracker"
+	"github.com/nextlinux/ecs-inventory/pkg/reporter"
 )
 
 // Check if AWS are present, should be stored in ~/.aws/credentials

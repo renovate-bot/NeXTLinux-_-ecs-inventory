@@ -1,7 +1,7 @@
 TEMPDIR = ./.tmp
 RESULTSDIR = $(TEMPDIR)/results
 LINTCMD = $(TEMPDIR)/golangci-lint run --tests=false --timeout 5m --config .golangci.yaml
-GOIMPORTS_CMD = $(TEMPDIR)/gosimports -local github.com/anchore
+GOIMPORTS_CMD = $(TEMPDIR)/gosimports -local github.com/nextlinux
 VERSION=$(shell git describe --dirty --always --tags)
 
 # the quality gate lower threshold for unit test total % coverage (by function statements)

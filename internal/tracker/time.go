@@ -3,7 +3,7 @@ package tracker
 import (
 	"time"
 
-	"github.com/anchore/ecs-inventory/internal/logger"
+	"github.com/nextlinux/ecs-inventory/internal/logger"
 )
 
 // TrackFunctionTime is a function that tracks the time it takes to execute a function
